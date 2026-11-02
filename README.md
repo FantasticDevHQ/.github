@@ -12,3 +12,7 @@ GitHub displays [`profile/README.md`](profile/README.md) on the organization ove
 Edit `profile/README.md` to add projects or change social links. Keep featured repositories public, give each a short description, and use absolute image URLs so they also render on the organization page.
 
 The official logo in `profile/assets/fantastic-dev-logo.svg` is copied unchanged from FantasticDevHQ/fantastic-dev-brand-kit at commit `0ce1aebc3e8418d7e59ce171e117cf9793dd2f3a`.
+
+## Contributing
+
+See [development instructions](docs/development.md) for checks and worktree commands, and the [pull request standard](docs/pull-request-standard.md) before opening a PR.

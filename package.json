@@ -1,0 +1,16 @@
+{
+  "name": "fantasticdevhq-org-profile",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "worktree:setup": "node scripts/worktree/cli.mjs setup",
+    "worktree:start": "node scripts/worktree/cli.mjs start",
+    "worktree:stop": "node scripts/worktree/cli.mjs stop",
+    "worktree:teardown": "node scripts/worktree/cli.mjs teardown",
+    "worktree:cleanup": "node scripts/worktree/cli.mjs cleanup",
+    "worktree:prune": "node scripts/worktree/cli.mjs prune",
+    "test:worktree": "node --test scripts/worktree/*.test.mjs",
+    "test:pr-standard": "node --test scripts/pr-standard.test.mjs scripts/enforce-pr-standard.test.mjs"
+  }
+}
