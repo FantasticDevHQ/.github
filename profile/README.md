@@ -24,7 +24,7 @@ These are some of the projects we use and maintain. Start with the one that solv
 
 | Project | What it does |
 | :--- | :--- |
-| **[Better Stripe](https://github.com/FantasticDevHQ/better-stripe)** | Stripe payments for Convex. Checkout, subscriptions, and Connect marketplaces, using Accounts v2. |
+| **[Better Stripe](https://github.com/FantasticDevHQ/better-stripe)** | Stripe Accounts v2 payments for Convex. Checkout, subscriptions, and Connect marketplaces, with React hooks and headless UI components. |
 | **[Convex Tinybird](https://github.com/FantasticDevHQ/convex-tinybird)** | Durable analytics event delivery from Convex to Tinybird, with transactional enqueueing and bounded retries. |
 | **[Convex Worktrees](https://github.com/FantasticDevHQ/convex-worktrees)** | Parallel Git worktrees with independent local Convex backends, stable ports, and safe setup and teardown. |
 
