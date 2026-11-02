@@ -1,0 +1,6 @@
+.worktree/
+.worktrees/
+.env.local
+.convex/
+node_modules/
+.DS_Store
