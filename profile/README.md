@@ -27,6 +27,8 @@ These are some of the projects we use and maintain. Start with the one that solv
 | **[Better Stripe](https://github.com/FantasticDevHQ/better-stripe)** | Stripe Accounts v2 payments for Convex. Checkout, subscriptions, and Connect marketplaces, with React hooks and headless UI components. |
 | **[Convex Tinybird](https://github.com/FantasticDevHQ/convex-tinybird)** | Durable analytics event delivery from Convex to Tinybird, with transactional enqueueing and bounded retries. |
 | **[Convex Worktrees](https://github.com/FantasticDevHQ/convex-worktrees)** | Parallel Git worktrees with independent local Convex backends, stable ports, and safe setup and teardown. |
+| **[Convex Cloudflare Email Service](https://github.com/FantasticDevHQ/convex-cf-email-service)** | Durable transactional email delivery from Convex through Cloudflare Email Service, with delivery tracking. |
+| **[Repo Gates](https://github.com/FantasticDevHQ/repo-gates)** | One command for repository quality checks, with configurable gates, ratchet guards, and CI parity checks. |
 
 [Explore all our public repositories →](https://github.com/orgs/FantasticDevHQ/repositories?type=public)
 
