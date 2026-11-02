@@ -9,7 +9,7 @@
 <p align="center">Open source for payments, analytics, and local development.<br />Built alongside the products we ship.</p>
 
 <p align="center">
-  <a href="https://www.youtube.com/@FantasticDevHQ"><img src="https://img.shields.io/badge/Watch_on_YouTube-FF0033?style=for-the-badge&amp;logo=youtube&amp;logoColor=white" alt="Watch Fantastic.Dev on YouTube" /></a>
+  <a href="https://www.youtube.com/@FantasticDevHQ"><img src="https://img.shields.io/badge/YouTube-FF0033?style=for-the-badge&amp;logo=youtube&amp;logoColor=white" alt="Fantastic.Dev on YouTube" /></a>
   <a href="https://twitter.com/FantasticDevHQ"><img src="https://img.shields.io/badge/Follow_on_X-0c0e13?style=for-the-badge&amp;logo=x&amp;logoColor=white" alt="Follow Fantastic.Dev on Twitter / X" /></a>
   <a href="https://fantastic.dev"><img src="https://img.shields.io/badge/Fantastic.Dev-94C173?style=for-the-badge&amp;logoColor=0c0e13" alt="Visit Fantastic.Dev" /></a>
 </p>
