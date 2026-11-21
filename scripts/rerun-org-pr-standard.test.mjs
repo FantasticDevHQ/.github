@@ -8,7 +8,10 @@ const event = (changes = { body: { from: "old" } }) => ({
   changes,
   pull_request: { number: 7, head: { sha: "abc1234def" } },
 });
-const run = (id, status, created_at, name = CHECK, head_sha = "abc1234def") => ({ id, status, created_at, name, head_sha });
+const REQUIRED = "https://api.github.com/repos/o/r/actions/required_workflows/425892824";
+const run = (id, status, created_at, name = CHECK, head_sha = "abc1234def", extra = {}) => ({
+  id, status, created_at, name, head_sha, workflow_url: REQUIRED, ...extra,
+});
 
 function fakeApi(sequence) {
   const calls = [];
@@ -31,6 +34,7 @@ test("waits for an in-progress run before re-running it", async () => {
   const { api, calls } = fakeApi([[run(5, "in_progress", "2026-01-01T00:00:00Z")], [run(5, "completed", "2026-01-01T00:00:00Z")]]);
   assert.equal(await rerunAfterEdit({ api, event: event(), sleep }), `re-ran ${CHECK} run 5`);
   assert.equal(calls.filter((call) => call.startsWith("GET")).length, 2);
+  assert.equal(calls.at(-1), "POST /actions/runs/5/rerun");
 });
 
 test("ignores edits that change neither title nor description, and other events", async () => {
@@ -61,4 +65,32 @@ test("the re-run workflow runs only trusted code and only on title or descriptio
   assert.doesNotMatch(workflow, /github\.event\.pull_request\.head/);
   assert.match(workflow, /actions: write\n\s+contents: read\n/);
   assert.match(workflow, /ubicloud-standard-2-ubuntu-2404/);
+});
+
+test("ignores a newer same-named decoy workflow that a pull request could add", async () => {
+  const decoy = run(8, "completed", "2026-01-05T00:00:00Z", CHECK, "abc1234def", {
+    workflow_url: "https://api.github.com/repos/o/r/actions/workflows/404308042",
+  });
+  const { api, calls } = fakeApi([[run(2, "completed", "2026-01-02T00:00:00Z"), decoy]]);
+  assert.equal(await rerunAfterEdit({ api, event: event(), sleep }), `re-ran ${CHECK} run 2`);
+  assert.equal(calls.at(-1), "POST /actions/runs/2/rerun");
+  const { api: onlyDecoy, calls: none } = fakeApi([[decoy]]);
+  assert.match(await rerunAfterEdit({ api: onlyDecoy, event: event(), sleep }), /no Org PR standard run/);
+  assert.ok(!none.some((call) => call.startsWith("POST")));
+});
+
+test("leaves runs awaiting approval alone", async () => {
+  for (const extra of [{ status: "action_required" }, { status: "waiting" }, { status: "completed", conclusion: "action_required" }]) {
+    const { api, calls } = fakeApi([[run(4, extra.status, "2026-01-01T00:00:00Z", CHECK, "abc1234def", extra)]]);
+    assert.match(await rerunAfterEdit({ api, event: event(), sleep }), /awaiting approval/);
+    assert.ok(!calls.some((call) => call.startsWith("POST")));
+  }
+});
+
+test("explains how to recover when GitHub refuses the re-run", async () => {
+  const api = async (method) => {
+    if (method === "POST") throw new Error("GitHub POST /actions/runs/3/rerun failed: 403");
+    return { workflow_runs: [run(3, "completed", "2026-01-01T00:00:00Z")] };
+  };
+  await assert.rejects(rerunAfterEdit({ api, event: event(), sleep }), /Push a commit, or close and reopen the pull request/);
 });

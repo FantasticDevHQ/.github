@@ -12,10 +12,21 @@ export function metadataChanged(event) {
   return Boolean(event.changes?.title || event.changes?.body);
 }
 
+// Only runs of the organization's required workflow count. A pull request can
+// add its own workflow with the same name and path, so match the
+// required-workflow URL, which a repository workflow cannot have.
+export const isRequiredRun = (run) =>
+  run.name === CHECK && /\/actions\/required_workflows\/\d+$/.test(run.workflow_url ?? "");
+
+// A fork run that a maintainer has not approved yet reads the current
+// metadata once it is approved, so there is nothing to re-run.
+export const awaitingApproval = (run) =>
+  run.status === "action_required" || run.status === "waiting" || run.conclusion === "action_required";
+
 // The newest run of the org check for this head, or undefined.
 export function latestRun(runs, headSha) {
   return runs
-    .filter((run) => run.name === CHECK && run.head_sha === headSha)
+    .filter((run) => isRequiredRun(run) && run.head_sha === headSha)
     .sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))[0];
 }
 
@@ -32,8 +43,17 @@ export async function rerunAfterEdit({ api, event, sleep, attempts = 40 }) {
     if (!run) return `no ${CHECK} run for ${headSha.slice(0, 7)} yet; it will check the current metadata when it starts`;
     // A run in progress may have read the metadata before this edit, so let it
     // finish and then re-run it.
+    if (awaitingApproval(run))
+      return `${CHECK} run ${run.id} is awaiting approval; it checks the current metadata once approved`;
     if (run.status === "completed") {
-      await api("POST", `/actions/runs/${run.id}/rerun`);
+      try {
+        await api("POST", `/actions/runs/${run.id}/rerun`);
+      } catch (error) {
+        // GitHub refuses re-runs more than 30 days after a run first started.
+        throw new Error(
+          `GitHub refused to re-run ${CHECK} run ${run.id} (${error.message}). Push a commit, or close and reopen the pull request, to start a fresh check.`,
+        );
+      }
       return `re-ran ${CHECK} run ${run.id}`;
     }
     await sleep(6000);
