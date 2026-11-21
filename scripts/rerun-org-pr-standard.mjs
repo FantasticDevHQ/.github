@@ -41,21 +41,22 @@ export async function rerunAfterEdit({ api, event, sleep, attempts = 40 }) {
     );
     const run = latestRun(runs, headSha);
     if (!run) return `no ${CHECK} run for ${headSha.slice(0, 7)} yet; it will check the current metadata when it starts`;
-    // A run in progress may have read the metadata before this edit, so let it
-    // finish and then re-run it.
     if (awaitingApproval(run))
       return `${CHECK} run ${run.id} is awaiting approval; it checks the current metadata once approved`;
     if (run.status === "completed") {
       try {
         await api("POST", `/actions/runs/${run.id}/rerun`);
       } catch (error) {
-        // GitHub refuses re-runs more than 30 days after a run first started.
+        // For example, GitHub refuses re-runs more than 30 days after a run
+        // first started. Pushing or reopening starts a fresh run either way.
         throw new Error(
           `GitHub refused to re-run ${CHECK} run ${run.id} (${error.message}). Push a commit, or close and reopen the pull request, to start a fresh check.`,
         );
       }
       return `re-ran ${CHECK} run ${run.id}`;
     }
+    // A run in progress may have read the metadata before this edit, so let it
+    // finish and then re-run it.
     await sleep(6000);
   }
   throw new Error(`${CHECK} did not finish in time; re-run it from the Checks tab`);
