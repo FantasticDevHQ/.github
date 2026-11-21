@@ -1,0 +1,25 @@
+name: Documentation
+description: Documentation is wrong, missing or unclear.
+title: "docs: "
+labels: ["documentation", "needs-triage"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Page or section
+      description: Link to the file or heading.
+      placeholder: https://github.com/FantasticDevHQ/<repository>/blob/main/README.md#quick-start
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong or missing
+      description: Quote the text, and say what happened when you followed it.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change
+      description: Optional. Wording, a missing step, or a corrected command.

@@ -1,0 +1,36 @@
+name: Feature request
+description: Propose something the project does not do yet.
+title: "feat: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the problem before the solution. Agreeing on the problem first saves everyone time, and is required before a feature pull request.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do, and what gets in the way today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How you would like it to work. Example API or configuration is welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and workarounds
+      description: Other approaches you considered, and what you do today.
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Would you like to build this?
+      options:
+        - "No"
+        - Yes, with some guidance
+        - Yes, I can open a pull request once the approach is agreed

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/FantasticDevHQ/.github/discussions/categories/q-a
+    about: Usage questions and ideas that are not yet a concrete request.
+  - name: Getting help
+    url: https://github.com/FantasticDevHQ/.github/blob/main/SUPPORT.md
+    about: Where to look first, and which form to use.
