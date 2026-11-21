@@ -1,0 +1,6 @@
+{
+  "name": "Issue standard",
+  "description": "Close issues that skip the issue forms, with an explanatory comment to the author, and reopen them once they conform.",
+  "iconName": "issue-opened",
+  "categories": ["Automation"]
+}
