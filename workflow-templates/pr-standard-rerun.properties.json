@@ -1,0 +1,6 @@
+{
+  "name": "PR standard re-run",
+  "description": "Re-run the required Org PR standard check when a pull request's title or description is edited.",
+  "iconName": "git-pull-request",
+  "categories": ["Automation"]
+}

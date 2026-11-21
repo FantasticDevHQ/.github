@@ -10,6 +10,8 @@ That workflow runs in the target repository with a read-only token, and executes
 
 Organization admins may bypass the ruleset in an emergency, through a pull request only; GitHub logs every bypass. Bot PRs, including release PRs, must comply like any other; they are not exempt.
 
+GitHub does not run ruleset-required workflows when only a PR's title or description changes. Every repository therefore also carries the [`PR standard re-run`](../workflow-templates/pr-standard-rerun.yml) workflow. On a title or description edit it re-runs the latest `Org PR standard` check for the PR's head (waiting for a run in progress to finish first), so fixing the description unblocks the PR and breaking it blocks it again. It runs [`scripts/rerun-org-pr-standard.mjs`](../scripts/rerun-org-pr-standard.mjs) from this repository with `actions: write` and never checks out PR code.
+
 ## Issues: forms, plus a check for API-created issues
 
 The issue forms in [`.github/ISSUE_TEMPLATE`](../.github/ISSUE_TEMPLATE) are the organization defaults, and `blank_issues_enabled: false` makes the GitHub UI refuse free-form issues.
