@@ -1,0 +1,59 @@
+name: Agent setup problem
+description: Your coding agent could not follow the README "Have my agent set this up" prompt to a working result.
+title: "agent-setup: "
+labels: ["agent-setup", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every Fantastic.Dev README has a setup prompt meant to work in any capable coding agent. When it does not, we treat that as a bug in our docs.
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and model
+      placeholder: "Claude Code (Opus 5.5), Codex (GPT-5.6), Cursor, ..."
+    validations:
+      required: true
+  - type: dropdown
+    id: prompt
+    attributes:
+      label: Prompt used
+      options:
+        - Pasted unchanged from the README
+        - Pasted with changes (described below)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Project version or README commit
+      description: The package version you installed, or the commit of the README you copied from.
+    validations:
+      required: true
+  - type: textarea
+    id: target
+    attributes:
+      label: Your project
+      description: "What the agent was installing into: framework, package manager, runtime, monorepo or not, and any existing setup that matters."
+      placeholder: |
+        Next.js 16 app, pnpm 10, Node.js 22, existing Convex backend in convex/
+    validations:
+      required: true
+  - type: textarea
+    id: stopped
+    attributes:
+      label: Where it went wrong
+      description: The step where the agent stopped, guessed, or produced something that did not work. Paste the agent's final report if you have it. Remove secrets.
+      render: markdown
+    validations:
+      required: true
+  - type: dropdown
+    id: manual
+    attributes:
+      label: Does the manual setup work?
+      options:
+        - I did not try it
+        - Yes, manual setup works
+        - No, manual setup fails too
+    validations:
+      required: true

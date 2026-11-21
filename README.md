@@ -34,6 +34,26 @@ Edit `profile/README.md` to add projects or change social links. Keep featured r
 
 The official logo in `profile/assets/fantastic-dev-logo.svg` is copied unchanged from FantasticDevHQ/fantastic-dev-brand-kit at commit `0ce1aebc3e8418d7e59ce171e117cf9793dd2f3a`.
 
+## Community health defaults
+
+GitHub uses the files in this repository as defaults for every FantasticDevHQ
+repository that does not have its own copy:
+
+| File | Purpose |
+| --- | --- |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Contributor Covenant 3.0 |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report issues and open pull requests |
+| [`SECURITY.md`](SECURITY.md) | Private vulnerability reporting |
+| [`SUPPORT.md`](SUPPORT.md) | Where to get help |
+| [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) | Bug, agent setup, documentation and feature forms |
+| [`.github/pull_request_template.md`](.github/pull_request_template.md) | The shared pull request template |
+
+These files are published unchanged from the canonical community templates.
+Do not edit them here alone; change the canonical templates first, then
+publish the identical files in a PR to this repository.
+
+Questions and ideas go to [Discussions](https://github.com/FantasticDevHQ/.github/discussions).
+
 ## Contributing
 
-See [development instructions](docs/development.md) for checks and worktree commands, and the [pull request standard](docs/pull-request-standard.md) before opening a PR.
+Read the [contributing guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md). See [development instructions](docs/development.md) for checks and worktree commands, and the [pull request standard](docs/pull-request-standard.md) before opening a PR.
