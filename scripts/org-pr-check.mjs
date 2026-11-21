@@ -41,7 +41,7 @@ export function report({ pr, errors }) {
     return `## PR standard passed\n\nThe title, required sections, evidence, and commit ticket references meet the [PR standard](${STANDARD}).\n`;
   return `## PR standard failed\n\n@${pr.user?.login ?? "author"}, this pull request cannot merge until these items are fixed:\n\n${errors
     .map((error) => `- ${error}`)
-    .join("\n")}\n\nEdit the PR title or description, or reword and push commits; the check runs again automatically. See the [PR standard](${STANDARD}) and use the repository's PR template.\n`;
+    .join("\n")}\n\nEdit the PR title or description (this check re-runs within a minute or two), or reword and push commits. See the [PR standard](${STANDARD}) and use the repository's PR template.\n`;
 }
 
 async function main() {

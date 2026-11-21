@@ -5,7 +5,7 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 const tests = readdirSync(new URL("./worktree/", import.meta.url))
   .filter((name) => name.endsWith(".test.mjs"))
   .map((name) => `scripts/worktree/${name}`);
-tests.push("scripts/pr-standard.test.mjs", "scripts/enforce-pr-standard.test.mjs", "scripts/issue-standard.test.mjs", "scripts/org-pr-check.test.mjs");
+tests.push("scripts/pr-standard.test.mjs", "scripts/enforce-pr-standard.test.mjs", "scripts/issue-standard.test.mjs", "scripts/org-pr-check.test.mjs", "scripts/rerun-org-pr-standard.test.mjs");
 const result = spawnSync(process.execPath, ["--test", ...tests], { cwd: root, stdio: "inherit" });
 if (result.error) throw result.error;
 process.exit(result.status ?? 1);
